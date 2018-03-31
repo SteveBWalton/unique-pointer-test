@@ -20,7 +20,7 @@ CSimpleClass::CSimpleClass
     )
 {
     // Save the label for the object.
-    // strcpy_s(m_sLabel, STRING_LENGTH, sLabel);
+    // strcpy_s(m_sLabel, STRING_LENGTH, sLabel);   Not available in gcc ?
     strcpy(m_sLabel, sLabel);
 
     // Display a message.

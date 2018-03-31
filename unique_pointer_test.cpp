@@ -20,11 +20,11 @@ int Function()
 {
     // Create a unique pointer object.
     CSimpleClass* pObject1 = new CSimpleClass("Function.One");
-    unique_ptr<CSimpleClass> up_Object1 (pObject1);
+    unique_ptr<CSimpleClass> upObject1 (pObject1);
 
     // Create a unique pointer object.
     CSimpleClass* pObject2 = new CSimpleClass("Function.Two");
-    unique_ptr<CSimpleClass> up_Object2 (pObject2);
+    unique_ptr<CSimpleClass> upObject2 (pObject2);
 
     // Return success.
     return 0;
@@ -53,7 +53,7 @@ int main
 
     // Create a unique pointer object.
     CSimpleClass* pObject2 = new CSimpleClass("UniquePtr");
-    unique_ptr<CSimpleClass> up_Object2 (pObject2);
+    unique_ptr<CSimpleClass> upObject2 (pObject2);
 
     // Release the standard object.
     delete pObject;
