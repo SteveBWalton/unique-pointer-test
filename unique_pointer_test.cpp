@@ -1,5 +1,5 @@
 /// Project to test unique pointers.
-//@file unique_pointer_test.cpp
+///@file unique_pointer_test.cpp
 
 // File header.
 #include "unique_pointer_test.h"
@@ -21,6 +21,7 @@ int ErrorFunction()
     CSimpleClass* pObject1 = new CSimpleClass("ErrorFunction");
     unique_ptr<CSimpleClass> upObject1 (pObject1);
 
+    // Throw an exception.
     throw(1);
 }
 
@@ -77,6 +78,10 @@ int main
     // Create a unique pointer object.
     CSimpleClass* pObject2 = new CSimpleClass("UniquePtr");
     unique_ptr<CSimpleClass> upObject2 (pObject2);
+
+    // Create an array of unique pointer objects, using empty constructor.
+    CSimpleClass* pObjectArray = new CSimpleClass[3];
+    unique_ptr<CSimpleClass[]> upObjectArray (pObjectArray);    // [] to use delete[] to release each object.
 
     // Release the standard object.
     delete pObject;

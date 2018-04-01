@@ -9,6 +9,7 @@ class CSimpleClass
 {
 // Constructors.
 public:
+    CSimpleClass();
     CSimpleClass(const char*);
     virtual ~CSimpleClass();
 

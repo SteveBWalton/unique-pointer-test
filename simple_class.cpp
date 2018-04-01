@@ -14,9 +14,21 @@ using namespace std;
 
 
 /// Class constructor.
+CSimpleClass::CSimpleClass()
+{
+    // Save a default label for the object.
+    strcpy(m_sLabel, "Empty");
+
+    // Display a message.
+    cout << "Hello from '" << m_sLabel << "' object." << endl;
+}
+
+
+
+/// Class constructor.
 CSimpleClass::CSimpleClass
     (
-    const char* sLabel
+    const char* sLabel      ///< Specifies the label for the object.
     )
 {
     // Save the label for the object.
