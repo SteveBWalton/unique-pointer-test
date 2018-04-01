@@ -48,3 +48,11 @@ CSimpleClass::~CSimpleClass()
     cout << "Goodbye from '" << m_sLabel << "' object." << endl;
 }
 
+
+
+/// A simple action.
+void CSimpleClass::Action()
+{
+    // Display a message.
+    cout << "Action from '" << m_sLabel << "' object." << endl;
+}

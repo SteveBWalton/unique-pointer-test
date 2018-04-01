@@ -16,4 +16,8 @@ public:
 // Member variables.
 private:
     char m_sLabel[STRING_LENGTH];
+
+// Methods.
+public:
+    void Action();
 };

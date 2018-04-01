@@ -68,9 +68,11 @@ int main
     cout << "Hello from unique pointer test." << endl;
 
     CSimpleClass oObject("Static");
+    oObject.Action();
 
     // Create a simple object.
     CSimpleClass* pObject = new CSimpleClass("Standard");
+    pObject->Action();
 
     // Call a function that creates unique pointer objects.
     Function();
@@ -78,10 +80,15 @@ int main
     // Create a unique pointer object.
     CSimpleClass* pObject2 = new CSimpleClass("UniquePtr");
     unique_ptr<CSimpleClass> upObject2 (pObject2);
+    pObject2->Action();
+    upObject2->Action();
 
     // Create an array of unique pointer objects, using empty constructor.
     CSimpleClass* pObjectArray = new CSimpleClass[3];
     unique_ptr<CSimpleClass[]> upObjectArray (pObjectArray);    // [] to use delete[] to release each object.
+    pObjectArray[0].Action();
+    pObjectArray[1].Action();
+    pObjectArray[2].Action();
 
     // Release the standard object.
     delete pObject;
