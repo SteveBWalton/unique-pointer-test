@@ -14,6 +14,18 @@ using namespace std;
 #include "simple_class.h"
 
 
+/// A function that throws an exception.
+int ErrorFunction()
+{
+    // Create a unique pointer object.
+    CSimpleClass* pObject1 = new CSimpleClass("ErrorFunction");
+    unique_ptr<CSimpleClass> upObject1 (pObject1);
+
+    throw(1);
+}
+
+
+
 
 /// A function that creates a couple of unique pointers.
 int Function()
@@ -22,9 +34,20 @@ int Function()
     CSimpleClass* pObject1 = new CSimpleClass("Function.One");
     unique_ptr<CSimpleClass> upObject1 (pObject1);
 
+    // Call a function that throws an exception.
+    try
+    {
+        ErrorFunction();
+    }
+    catch(...)
+    {
+        cout << "An exception was caught." << endl;
+    }
+
     // Create a unique pointer object.
     CSimpleClass* pObject2 = new CSimpleClass("Function.Two");
     unique_ptr<CSimpleClass> upObject2 (pObject2);
+
 
     // Return success.
     return 0;
