@@ -7,6 +7,7 @@
 // System headers.
 #include <stdio.h>
 #include <iostream>
+#include <vector>
 #include <memory>           // unique_ptr
 using namespace std;
 
@@ -89,6 +90,12 @@ int main
     pObjectArray[0].Action();
     pObjectArray[1].Action();
     pObjectArray[2].Action();
+
+    // Probably better to use vector for an array of objects.
+    vector<CSimpleClass> oVector (3);
+    oVector[0].Action();
+    oVector[1].Action();
+    oVector[2].Action();
 
     // Release the standard object.
     delete pObject;
