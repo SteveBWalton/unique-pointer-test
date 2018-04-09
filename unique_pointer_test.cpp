@@ -91,7 +91,9 @@ int main
     pObjectArray[1].Action();
     pObjectArray[2].Action();
 
-    // Probably better to use vector for an array of objects.
+    // A vector can be used to create an array of objects.
+    // This works well for int and double where there is no constructor / destructor.
+    // For an actual object. need to be carefull that the constructors / destructors are called.
     vector<CSimpleClass> oVector (3);
     oVector[0].Action();
     oVector[1].Action();
