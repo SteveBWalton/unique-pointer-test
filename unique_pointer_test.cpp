@@ -14,7 +14,8 @@ using namespace std;
 #include "simple_class.h"
 
 
-/// A function that throws an exception.
+
+/// A function that create an object and then throws an exception.
 int ErrorFunction()
 {
     // Create a unique pointer object.
@@ -31,7 +32,7 @@ int ErrorFunction()
 /// A function that creates a couple of unique pointers.
 int Function()
 {
-    // Create a unique pointer object.
+    // Create an object with an attached unique pointer object.
     CSimpleClass* pObject1 = new CSimpleClass("Function.One");
     unique_ptr<CSimpleClass> upObject1 (pObject1);
 
@@ -67,6 +68,7 @@ int main
     // Welcome message.
     cout << "Hello from unique pointer test." << endl;
 
+    // Make a static object.
     CSimpleClass oObject("Static");
     oObject.Action();
 
@@ -77,8 +79,9 @@ int main
     // Call a function that creates unique pointer objects.
     Function();
 
-    // Create a unique pointer object.
+    // Create a simple object that we will attach a unique pointer object to.
     CSimpleClass* pObject2 = new CSimpleClass("UniquePtr");
+    // Create a unique pointer object.
     unique_ptr<CSimpleClass> upObject2 (pObject2);
     pObject2->Action();
     upObject2->Action();
