@@ -7,6 +7,7 @@
 // System headers.
 #include <stdio.h>
 #include <iostream>
+#include <vector>
 #include <memory>           // unique_ptr
 using namespace std;
 
@@ -92,6 +93,14 @@ int main
     pObjectArray[0].Action();
     pObjectArray[1].Action();
     pObjectArray[2].Action();
+
+    // A vector can be used to create an array of objects.
+    // This works well for int and double where there is no constructor / destructor.
+    // For an actual object. need to be carefull that the constructors / destructors are called.
+    vector<CSimpleClass> oVector (3);
+    oVector[0].Action();
+    oVector[1].Action();
+    oVector[2].Action();
 
     // Release the standard object.
     delete pObject;
