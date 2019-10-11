@@ -9,7 +9,9 @@
 #include <iostream>
 #include <vector>
 #include <memory>           // unique_ptr
-using namespace std;
+
+// This is bad practice.
+// using namespace std;
 
 // Applications headers.
 #include "simple_class.h"
@@ -21,7 +23,7 @@ int ErrorFunction()
 {
     // Create a unique pointer object.
     CSimpleClass* pObject1 = new CSimpleClass("ErrorFunction");
-    unique_ptr<CSimpleClass> upObject1 (pObject1);
+    std::unique_ptr<CSimpleClass> upObject1 (pObject1);
 
     // Throw an exception.
     throw(1);
@@ -33,9 +35,12 @@ int ErrorFunction()
 /// A function that creates a couple of unique pointers.
 int Function()
 {
+    using std::cout;
+    using std::endl;
+
     // Create an object with an attached unique pointer object.
     CSimpleClass* pObject1 = new CSimpleClass("Function.One");
-    unique_ptr<CSimpleClass> upObject1 (pObject1);
+    std::unique_ptr<CSimpleClass> upObject1 (pObject1);
 
     // Call a function that throws an exception.
     try
@@ -49,7 +54,7 @@ int Function()
 
     // Create a unique pointer object.
     CSimpleClass* pObject2 = new CSimpleClass("Function.Two");
-    unique_ptr<CSimpleClass> upObject2 (pObject2);
+    std::unique_ptr<CSimpleClass> upObject2 (pObject2);
 
 
     // Return success.
@@ -66,6 +71,9 @@ int main
     const char**    argv    ///< Specifies the actual command line arguments.
     )
 {
+    using std::cout;
+    using std::endl;
+
     // Welcome message.
     cout << "Hello from unique pointer test." << endl;
 
@@ -83,13 +91,13 @@ int main
     // Create a simple object that we will attach a unique pointer object to.
     CSimpleClass* pObject2 = new CSimpleClass("UniquePtr");
     // Create a unique pointer object.
-    unique_ptr<CSimpleClass> upObject2 (pObject2);
+    std::unique_ptr<CSimpleClass> upObject2 (pObject2);
     pObject2->Action();
     upObject2->Action();
 
     // Create an array of unique pointer objects, using empty constructor.
     CSimpleClass* pObjectArray = new CSimpleClass[3];
-    unique_ptr<CSimpleClass[]> upObjectArray (pObjectArray);    // [] to use delete[] to release each object.
+    std::unique_ptr<CSimpleClass[]> upObjectArray (pObjectArray);    // [] to use delete[] to release each object.
     pObjectArray[0].Action();
     pObjectArray[1].Action();
     pObjectArray[2].Action();
@@ -97,7 +105,7 @@ int main
     // A vector can be used to create an array of objects.
     // This works well for int and double where there is no constructor / destructor.
     // For an actual object. need to be carefull that the constructors / destructors are called.
-    vector<CSimpleClass> oVector (3);
+    std::vector<CSimpleClass> oVector (3);
     oVector[0].Action();
     oVector[1].Action();
     oVector[2].Action();

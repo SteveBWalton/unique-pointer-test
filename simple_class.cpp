@@ -7,7 +7,9 @@
 // System headers.
 #include <iostream>
 #include <string.h>
-using namespace std;
+
+// This is bad practice.
+// using namespace std;
 
 // Application headers.
 
@@ -20,7 +22,7 @@ CSimpleClass::CSimpleClass()
     strcpy(m_sLabel, "Empty");
 
     // Display a message.
-    cout << "Hello from '" << m_sLabel << "' object." << endl;
+    std::cout << "Hello from '" << m_sLabel << "' object." << std::endl;
 }
 
 
@@ -36,7 +38,7 @@ CSimpleClass::CSimpleClass
     strcpy(m_sLabel, sLabel);
 
     // Display a message.
-    cout << "Hello from '" << m_sLabel << "' object." << endl;
+    std::cout << "Hello from '" << m_sLabel << "' object." << std::endl;
 }
 
 
@@ -45,7 +47,7 @@ CSimpleClass::CSimpleClass
 CSimpleClass::~CSimpleClass()
 {
     // Display a message.
-    cout << "Goodbye from '" << m_sLabel << "' object." << endl;
+    std::cout << "Goodbye from '" << m_sLabel << "' object." << std::endl;
 }
 
 
@@ -54,5 +56,5 @@ CSimpleClass::~CSimpleClass()
 void CSimpleClass::Action()
 {
     // Display a message.
-    cout << "Action from '" << m_sLabel << "' object." << endl;
+    std::cout << "Action from '" << m_sLabel << "' object." << std::endl;
 }
