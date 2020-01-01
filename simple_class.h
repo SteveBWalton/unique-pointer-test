@@ -5,19 +5,19 @@
 
 #define STRING_LENGTH 20
 
-class CSimpleClass
+class SimpleClass
 {
 // Constructors.
 public:
-    CSimpleClass();
-    CSimpleClass(const char*);
-    virtual ~CSimpleClass();
+    SimpleClass();
+    SimpleClass(const char*);
+    virtual ~SimpleClass();
 
 // Member variables.
 private:
-    char m_sLabel[STRING_LENGTH];
+    char label_[STRING_LENGTH];
 
 // Methods.
 public:
-    void Action();
+    void action();
 };

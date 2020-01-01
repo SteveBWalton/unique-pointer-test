@@ -8,53 +8,50 @@
 #include <iostream>
 #include <string.h>
 
-// This is bad practice.
-// using namespace std;
-
 // Application headers.
 
 
 
 /// Class constructor.
-CSimpleClass::CSimpleClass()
+SimpleClass::SimpleClass()
 {
     // Save a default label for the object.
-    strcpy(m_sLabel, "Empty");
+    strcpy(label_, "Empty");
 
     // Display a message.
-    std::cout << "Hello from '" << m_sLabel << "' object." << std::endl;
+    std::cout << "Hello from '" << label_ << "' object." << std::endl;
 }
 
 
 
 /// Class constructor.
-CSimpleClass::CSimpleClass
+SimpleClass::SimpleClass
     (
-    const char* sLabel      ///< Specifies the label for the object.
+    const char* label      ///< Specifies the label for the object.
     )
 {
     // Save the label for the object.
-    // strcpy_s(m_sLabel, STRING_LENGTH, sLabel);   Not available in gcc ?
-    strcpy(m_sLabel, sLabel);
+    // strcpy_s(label_, STRING_LENGTH, label);   Not available in gcc ?
+    strcpy(label_, label);
 
     // Display a message.
-    std::cout << "Hello from '" << m_sLabel << "' object." << std::endl;
+    std::cout << "Hello from '" << label_ << "' object." << std::endl;
 }
 
 
 
 /// Class destructor.
-CSimpleClass::~CSimpleClass()
+SimpleClass::~SimpleClass()
 {
     // Display a message.
-    std::cout << "Goodbye from '" << m_sLabel << "' object." << std::endl;
+    std::cout << "Goodbye from '" << label_ << "' object." << std::endl;
 }
 
 
 
 /// A simple action.
-void CSimpleClass::Action()
+void SimpleClass::action()
 {
     // Display a message.
-    std::cout << "Action from '" << m_sLabel << "' object." << std::endl;
+    std::cout << "Action from '" << label_ << "' object." << std::endl;
 }

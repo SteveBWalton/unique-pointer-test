@@ -10,20 +10,17 @@
 #include <vector>
 #include <memory>           // unique_ptr
 
-// This is bad practice.
-// using namespace std;
-
 // Applications headers.
 #include "simple_class.h"
 
 
 
 /// A function that create an object and then throws an exception.
-int ErrorFunction()
+int errorFunction()
 {
     // Create a unique pointer object.
-    CSimpleClass* pObject1 = new CSimpleClass("ErrorFunction");
-    std::unique_ptr<CSimpleClass> upObject1 (pObject1);
+    SimpleClass* errorFunctionObject = new SimpleClass("ErrorFunction");
+    std::unique_ptr<SimpleClass> upObject (errorFunctionObject);
 
     // Throw an exception.
     throw(1);
@@ -33,19 +30,19 @@ int ErrorFunction()
 
 
 /// A function that creates a couple of unique pointers.
-int Function()
+int function()
 {
     using std::cout;
     using std::endl;
 
     // Create an object with an attached unique pointer object.
-    CSimpleClass* pObject1 = new CSimpleClass("Function.One");
-    std::unique_ptr<CSimpleClass> upObject1 (pObject1);
+    SimpleClass* functionOneObject = new SimpleClass("Function.One");
+    std::unique_ptr<SimpleClass> upObject1 (functionOneObject);
 
     // Call a function that throws an exception.
     try
     {
-        ErrorFunction();
+        errorFunction();
     }
     catch(...)
     {
@@ -53,9 +50,8 @@ int Function()
     }
 
     // Create a unique pointer object.
-    CSimpleClass* pObject2 = new CSimpleClass("Function.Two");
-    std::unique_ptr<CSimpleClass> upObject2 (pObject2);
-
+    SimpleClass* functionTwoObject = new SimpleClass("Function.Two");
+    std::unique_ptr<SimpleClass> upObject2 (functionTwoObject);
 
     // Return success.
     return 0;
@@ -78,40 +74,40 @@ int main
     cout << "Hello from unique pointer test." << endl;
 
     // Make a static object.
-    CSimpleClass oObject("Static");
-    oObject.Action();
+    SimpleClass staticObject("Static");
+    staticObject.action();
 
     // Create a simple object.
-    CSimpleClass* pObject = new CSimpleClass("Standard");
-    pObject->Action();
+    SimpleClass* localObject = new SimpleClass("Standard");
+    localObject->action();
 
     // Call a function that creates unique pointer objects.
-    Function();
+    function();
 
     // Create a simple object that we will attach a unique pointer object to.
-    CSimpleClass* pObject2 = new CSimpleClass("UniquePtr");
+    SimpleClass* anotherLocalObject = new SimpleClass("UniquePtr");
     // Create a unique pointer object.
-    std::unique_ptr<CSimpleClass> upObject2 (pObject2);
-    pObject2->Action();
-    upObject2->Action();
+    std::unique_ptr<SimpleClass> upObject2 (anotherLocalObject);
+    anotherLocalObject->action();
+    upObject2->action();
 
     // Create an array of unique pointer objects, using empty constructor.
-    CSimpleClass* pObjectArray = new CSimpleClass[3];
-    std::unique_ptr<CSimpleClass[]> upObjectArray (pObjectArray);    // [] to use delete[] to release each object.
-    pObjectArray[0].Action();
-    pObjectArray[1].Action();
-    pObjectArray[2].Action();
+    SimpleClass* objectArray = new SimpleClass[3];
+    std::unique_ptr<SimpleClass[]> upObjectArray (objectArray);    // [] to use delete[] to release each object.
+    objectArray[0].action();
+    objectArray[1].action();
+    objectArray[2].action();
 
     // A vector can be used to create an array of objects.
     // This works well for int and double where there is no constructor / destructor.
     // For an actual object. need to be carefull that the constructors / destructors are called.
-    std::vector<CSimpleClass> oVector (3);
-    oVector[0].Action();
-    oVector[1].Action();
-    oVector[2].Action();
+    std::vector<SimpleClass> objectVector (3);
+    objectVector[0].action();
+    objectVector[1].action();
+    objectVector[2].action();
 
     // Release the standard object.
-    delete pObject;
+    delete localObject;
 
     // Return success.
     return 0;
