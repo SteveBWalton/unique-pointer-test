@@ -15,7 +15,7 @@ PROCESSOR = $(shell uname -m)
 LIBS :=  
 LIBDIR := 
 
-OPTIONS := -Wall -std=c++11
+OPTIONS := -Wall -std=c++17
 
 #
 # Source objects (prefix with obj/)

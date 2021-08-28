@@ -1,4 +1,5 @@
 /// Implementation of a simple class to test unique pointers.
+/// std::string_view requires C++ 17.
 ///@file simple_class.cpp
 
 // File header.
@@ -6,7 +7,7 @@
 
 // System headers.
 #include <iostream>
-#include <string.h>
+#include <string>
 
 // Application headers.
 
@@ -16,7 +17,8 @@
 SimpleClass::SimpleClass()
 {
     // Save a default label for the object.
-    strcpy(label_, "Empty");
+    // strcpy(label_, "Empty");
+    label_ = "Empty";
 
     // Display a message.
     std::cout << "Hello from '" << label_ << "' object." << std::endl;
@@ -26,13 +28,12 @@ SimpleClass::SimpleClass()
 
 /// Class constructor.
 SimpleClass::SimpleClass
-    (
-    const char* label      ///< Specifies the label for the object.
-    )
+(
+    std::string_view label  ///< Specifies the label for the object.
+)
 {
     // Save the label for the object.
-    // strcpy_s(label_, STRING_LENGTH, label);   Not available in gcc ?
-    strcpy(label_, label);
+    label_ = label;
 
     // Display a message.
     std::cout << "Hello from '" << label_ << "' object." << std::endl;

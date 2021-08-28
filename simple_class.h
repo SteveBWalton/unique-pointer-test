@@ -3,19 +3,21 @@
 
 #pragma once
 
-#define STRING_LENGTH 20
+// System headers.
+#include <string>
 
 class SimpleClass
 {
 // Constructors.
 public:
     SimpleClass();
-    SimpleClass(const char*);
+    SimpleClass(std::string_view);
     virtual ~SimpleClass();
 
 // Member variables.
 private:
-    char label_[STRING_LENGTH];
+//  char label_[STRING_LENGTH];
+    std::string label_;
 
 // Methods.
 public:

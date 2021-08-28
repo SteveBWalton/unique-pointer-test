@@ -19,8 +19,7 @@
 int errorFunction()
 {
     // Create a unique pointer object.
-    SimpleClass* errorFunctionObject = new SimpleClass("ErrorFunction");
-    std::unique_ptr<SimpleClass> upObject (errorFunctionObject);
+    std::unique_ptr<SimpleClass> errorFunctionObject (new SimpleClass("errorFunction"));
 
     // Throw an exception.
     throw(1);
@@ -30,14 +29,13 @@ int errorFunction()
 
 
 /// A function that creates a couple of unique pointers.
-int function()
+int testFunction()
 {
     using std::cout;
     using std::endl;
 
     // Create an object with an attached unique pointer object.
-    SimpleClass* functionOneObject = new SimpleClass("Function.One");
-    std::unique_ptr<SimpleClass> upObject1 (functionOneObject);
+    std::unique_ptr<SimpleClass> functionOneObject (new SimpleClass("testFunction.One"));
 
     // Call a function that throws an exception.
     try
@@ -50,8 +48,7 @@ int function()
     }
 
     // Create a unique pointer object.
-    SimpleClass* functionTwoObject = new SimpleClass("Function.Two");
-    std::unique_ptr<SimpleClass> upObject2 (functionTwoObject);
+    std::unique_ptr<SimpleClass> functionTwoObject (new SimpleClass("testFunction.Two"));
 
     // Return success.
     return 0;
@@ -62,10 +59,10 @@ int function()
 /// The main entry point for the "unique_pointer_test" program.
 ///@returns 0 for success, otherwise an error code.
 int main
-    (
+(
     int             argc,   ///< Specifies the number of command line arguments.
     const char**    argv    ///< Specifies the actual command line arguments.
-    )
+)
 {
     using std::cout;
     using std::endl;
@@ -82,25 +79,20 @@ int main
     localObject->action();
 
     // Call a function that creates unique pointer objects.
-    function();
+    testFunction();
 
-    // Create a simple object that we will attach a unique pointer object to.
-    SimpleClass* anotherLocalObject = new SimpleClass("UniquePtr");
     // Create a unique pointer object.
-    std::unique_ptr<SimpleClass> upObject2 (anotherLocalObject);
+    std::unique_ptr<SimpleClass> anotherLocalObject (new SimpleClass("UniquePtr"));
     anotherLocalObject->action();
-    upObject2->action();
 
     // Create an array of unique pointer objects, using empty constructor.
-    SimpleClass* objectArray = new SimpleClass[3];
-    std::unique_ptr<SimpleClass[]> upObjectArray (objectArray);    // [] to use delete[] to release each object.
+    std::unique_ptr<SimpleClass[]> objectArray (new SimpleClass[3]);    // [] to use delete[] to release each object.
     objectArray[0].action();
     objectArray[1].action();
     objectArray[2].action();
 
     // A vector can be used to create an array of objects.
-    // This works well for int and double where there is no constructor / destructor.
-    // For an actual object. need to be carefull that the constructors / destructors are called.
+    // This looks nicer than unique_ptr but seems equivalent.
     std::vector<SimpleClass> objectVector (3);
     objectVector[0].action();
     objectVector[1].action();
