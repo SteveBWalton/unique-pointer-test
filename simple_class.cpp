@@ -17,7 +17,6 @@
 SimpleClass::SimpleClass()
 {
     // Save a default label for the object.
-    // strcpy(label_, "Empty");
     label_ = "Empty";
 
     // Display a message.
