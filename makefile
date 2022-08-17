@@ -25,12 +25,15 @@ obj/unique_pointer_test.o \
 obj/simple_class.o 
 
 bin/unique_pointer_test : $(OBJS)
+	@mkdir -p $(@D)
 	g++ $(OPTIONS) -o bin/unique_pointer_test $(OBJS) $(LIBDIR) $(LIBS)
 
 obj/unique_pointer_test.o : unique_pointer_test.cpp
+	@mkdir -p $(@D)
 	g++ -c $(OPTIONS) -o obj/unique_pointer_test.o unique_pointer_test.cpp
 
 obj/simple_class.o : simple_class.cpp simple_class.h
+	@mkdir -p $(@D)
 	g++ -c $(OPTIONS) -o obj/simple_class.o simple_class.cpp
 
 clean:
