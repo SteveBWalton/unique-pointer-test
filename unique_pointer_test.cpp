@@ -98,6 +98,19 @@ int main
     objectVector[1].action();
     objectVector[2].action();
 
+    // Strange case where you want a vector but also want to use new for a constructor with parameters.
+    std::vector<std::unique_ptr<SimpleClass>> uniqueObjectVector(3);
+    for (int i = 0; i < 3; i++)
+    {
+        // Create a new SimpleClass object.
+        std::unique_ptr<SimpleClass> tempObject(new SimpleClass("UniqueObjectVector " + std::to_string(i)));
+        // Allow the vector to own the tempObject.
+        uniqueObjectVector[i] = std::move(tempObject);
+    }
+    uniqueObjectVector[0]->action();
+    uniqueObjectVector[1]->action();
+    uniqueObjectVector[2]->action();
+
     // Release the standard object.
     delete localObject;
 
