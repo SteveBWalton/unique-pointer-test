@@ -97,8 +97,12 @@ int main
     objectVector[0].action();
     objectVector[1].action();
     objectVector[2].action();
+    // This shows that 'std::vector<std::unique_ptr<SimpleClass>>' is not needed.
+    objectVector.push_back(SimpleClass("Not unique_ptr 1"));
+    objectVector.push_back(SimpleClass("Not unique_ptr 2"));
 
     // Strange case where you want a vector but also want to use new for a constructor with parameters.
+    // The vector.push_back() example above shows that this is not needed.
     std::vector<std::unique_ptr<SimpleClass>> uniqueObjectVector(3);
     for (int i = 0; i < 3; i++)
     {
