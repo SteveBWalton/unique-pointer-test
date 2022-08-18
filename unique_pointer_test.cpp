@@ -56,6 +56,20 @@ int testFunction()
 
 
 
+/// Test that the object is not destroyed by function going out of scope but by the vector going out of scope.
+void testPushToVector
+(
+    std::vector<SimpleClass>& theVector
+)
+{
+    theVector.push_back(SimpleClass("Inside Function 1"));
+    theVector.push_back(SimpleClass("Inside Function 2"));
+
+    std::cout << "testPushToVector() has finished." << std::endl;
+}
+
+
+
 /// The main entry point for the "unique_pointer_test" program.
 ///@returns 0 for success, otherwise an error code.
 int main
@@ -100,6 +114,8 @@ int main
     // This shows that 'std::vector<std::unique_ptr<SimpleClass>>' is not needed.
     objectVector.push_back(SimpleClass("Not unique_ptr 1"));
     objectVector.push_back(SimpleClass("Not unique_ptr 2"));
+    // This shows that the vector destroys the object not the original scope ending.
+    testPushToVector(objectVector);
 
     // Strange case where you want a vector but also want to use new for a constructor with parameters.
     // The vector.push_back() example above shows that this is not needed.
