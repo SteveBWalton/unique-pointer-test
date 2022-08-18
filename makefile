@@ -37,8 +37,8 @@ obj/simple_class.o : simple_class.cpp simple_class.h
 	g++ -c $(OPTIONS) -o obj/simple_class.o simple_class.cpp
 
 clean:
-	-rm bin/unique_pointer_test 2>/dev/null
-	-rm $(OBJS) 2>/dev/null
+	-rm -f bin/unique_pointer_test
+	-rm -f $(OBJS)
 
 # Add a link from /usr/local/bin/keysync to this file
 # eg. ln -s /home/steve/Documents/bin/keysync.exe /usr/local/bin/keysync
