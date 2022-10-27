@@ -70,6 +70,18 @@ void testPushToVector
 
 
 
+/// Test passing unique_ptr objects to functions.
+void useObject
+(
+    const SimpleClass& localObject
+)
+{
+    std::cout << "Inside useObject() function." << std::endl;
+    localObject.action();
+}
+
+
+
 /// The main entry point for the "unique_pointer_test" program.
 ///@returns 0 for success, otherwise an error code.
 int main
@@ -98,6 +110,7 @@ int main
     // Create a unique pointer object.
     std::unique_ptr<SimpleClass> anotherLocalObject (new SimpleClass("UniquePtr"));
     anotherLocalObject->action();
+    useObject(*anotherLocalObject);
 
     // Create an array of unique pointer objects, using empty constructor.
     std::unique_ptr<SimpleClass[]> objectArray (new SimpleClass[3]);    // [] to use delete[] to release each object.

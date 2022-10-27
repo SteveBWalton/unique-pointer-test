@@ -21,5 +21,5 @@ private:
 
 // Methods.
 public:
-    void action();
+    void action() const;
 };

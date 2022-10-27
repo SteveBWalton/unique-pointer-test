@@ -50,7 +50,7 @@ SimpleClass::~SimpleClass()
 
 
 /// A simple action.
-void SimpleClass::action()
+void SimpleClass::action() const
 {
     // Display a message.
     std::cout << "Action from '" << label_ << "' object." << std::endl;
