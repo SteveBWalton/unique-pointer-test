@@ -131,28 +131,39 @@ int main
     objectArray[1].action();
     objectArray[2].action();
 
-    // std::vector<SimpleClass> objectVector;
-    // The std::vector<SimpleClass> objectVector; had lots a problems with extra SimpleClass destruction.
-
     // A vector can be used to create an array of objects.
-    // This looks nicer than unique_ptr but seems equivalent and has extra functions.
-    std::cout << std::endl << "Vector (1)." << std::endl;
-    std::vector<std::unique_ptr<SimpleClass>> objectVector;
-    // Without the reserve() push_back causes object destructions.
+    // This has some problems with extra SimpleClass copy constructions and then destructions.
+    std::cout << std::endl << "Simple Vector." << std::endl;
+    std::vector<SimpleClass> objectVector;
     objectVector.reserve(10);
-    objectVector.push_back(std::make_unique<SimpleClass>("Not unique_ptr 1"));
-    objectVector.push_back(std::make_unique<SimpleClass>("Not unique_ptr 2"));
+    // In the following, a copy constructor is used to put an object in the vector.
+    objectVector.push_back(SimpleClass("Simple Vector 1"));
+    objectVector.push_back(SimpleClass("Simple Vector 2"));
+    objectVector.emplace_back(SimpleClass("Simple Vector 3"));
+    objectVector[0].action();
+    objectVector[1].action();
+    objectVector[2].action();
+
+    // This does not have the copy constructor problems since unique_ptr can not be copied only moved.
+    std::cout << std::endl << "Vector (1)." << std::endl;
+    std::vector<std::unique_ptr<SimpleClass>> uniqueObjectVector;
+    // Even without (or too small) a reserve, then are no object copies only moves.
+    uniqueObjectVector.reserve(10 - 9);
+    // This is much better than the push_back() on objectVector because the object is moved into the vector not copied.
+    uniqueObjectVector.push_back(std::make_unique<SimpleClass>("Not unique_ptr 1"));
+    uniqueObjectVector.push_back(std::make_unique<SimpleClass>("Not unique_ptr 2"));
     // This shows that the vector destroys the object not the original scope ending.
-    testPushToVector(objectVector);
-    objectVector[0]->action();
-    objectVector[1]->action();
-    objectVector[2]->action();
-    objectVector[3]->action();
+    testPushToVector(uniqueObjectVector);
+    uniqueObjectVector[0]->action();
+    uniqueObjectVector[1]->action();
+    uniqueObjectVector[2]->action();
+    uniqueObjectVector[3]->action();
 
     // Another way of moving objects into a vector.
     // The vector.push_back() example above shows that this is not needed.
     std::cout << std::endl << "Vector (2)." << std::endl;
-    std::vector<std::unique_ptr<SimpleClass>> uniqueObjectVector(3);
+    uniqueObjectVector.clear();
+    uniqueObjectVector.resize(3);
     for (int i = 0; i < 3; i++)
     {
         // Create a new SimpleClass object.

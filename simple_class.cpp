@@ -45,6 +45,21 @@ SimpleClass::SimpleClass
 
 
 
+/// Copy constructor.
+SimpleClass::SimpleClass
+(
+    const SimpleClass& sourceObject
+)
+{
+    // Save the label for the object.
+    label_ = sourceObject.label_ + " (copy)";
+
+    // Display a message.
+    std::cout << "Copy Constructor for '" << label_ << "' object." << std::endl;
+}
+
+
+
 /// Class destructor.
 SimpleClass::~SimpleClass()
 {

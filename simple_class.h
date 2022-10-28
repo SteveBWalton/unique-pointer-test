@@ -12,6 +12,7 @@ class SimpleClass
 public:
     SimpleClass();
     SimpleClass(std::string_view);
+    SimpleClass(const SimpleClass&);
     virtual ~SimpleClass();
 
 // Member variables.
