@@ -82,6 +82,16 @@ void useObject
 
 
 
+/// Test of creating a unique_ptr in a function.
+std::unique_ptr<SimpleClass> makeObject()
+{
+    std::unique_ptr<SimpleClass> localObject (new SimpleClass("CreatedInsideFunction"));
+    // std::move() is not needed because of copy elision.
+    return localObject;
+}
+
+
+
 /// The main entry point for the "unique_pointer_test" program.
 ///@returns 0 for success, otherwise an error code.
 int main
@@ -143,6 +153,10 @@ int main
     uniqueObjectVector[0]->action();
     uniqueObjectVector[1]->action();
     uniqueObjectVector[2]->action();
+
+    // Return a unique pointer from a function.
+    std::unique_ptr<SimpleClass> functionObject = makeObject();
+    functionObject->action();
 
     // Release the standard object.
     delete localObject;
