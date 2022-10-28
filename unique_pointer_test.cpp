@@ -59,11 +59,11 @@ int testFunction()
 /// Test that the object is not destroyed by function going out of scope but by the vector going out of scope.
 void testPushToVector
 (
-    std::vector<SimpleClass>& theVector
+    std::vector<std::unique_ptr<SimpleClass>>& theVector
 )
 {
-    theVector.push_back(SimpleClass("Inside Function 1"));
-    theVector.push_back(SimpleClass("Inside Function 2"));
+    theVector.push_back(std::make_unique<SimpleClass>("Inside Function 1"));
+    theVector.push_back(std::make_unique<SimpleClass>("Inside Function 2"));
 
     std::cout << "testPushToVector() has finished." << std::endl;
 }
@@ -115,33 +115,43 @@ int main
     localObject->action();
 
     // Call a function that creates unique pointer objects.
+    std::cout << std::endl << "Use inside function." << std::endl;
     testFunction();
 
     // Create a unique pointer object.
+    std::cout << std::endl << "Use function." << std::endl;
     std::unique_ptr<SimpleClass> anotherLocalObject (new SimpleClass("UniquePtr"));
     anotherLocalObject->action();
     useObject(*anotherLocalObject);
 
     // Create an array of unique pointer objects, using empty constructor.
+    std::cout << std::endl << "Array of unique pointers." << std::endl;
     std::unique_ptr<SimpleClass[]> objectArray (new SimpleClass[3]);    // [] to use delete[] to release each object.
     objectArray[0].action();
     objectArray[1].action();
     objectArray[2].action();
 
+    // std::vector<SimpleClass> objectVector;
+    // The std::vector<SimpleClass> objectVector; had lots a problems with extra SimpleClass destruction.
+
     // A vector can be used to create an array of objects.
-    // This looks nicer than unique_ptr but seems equivalent.
-    std::vector<SimpleClass> objectVector (3);
-    objectVector[0].action();
-    objectVector[1].action();
-    objectVector[2].action();
-    // This shows that 'std::vector<std::unique_ptr<SimpleClass>>' is not needed.
-    objectVector.push_back(SimpleClass("Not unique_ptr 1"));
-    objectVector.push_back(SimpleClass("Not unique_ptr 2"));
+    // This looks nicer than unique_ptr but seems equivalent and has extra functions.
+    std::cout << std::endl << "Vector (1)." << std::endl;
+    std::vector<std::unique_ptr<SimpleClass>> objectVector;
+    // Without the reserve() push_back causes object destructions.
+    objectVector.reserve(10);
+    objectVector.push_back(std::make_unique<SimpleClass>("Not unique_ptr 1"));
+    objectVector.push_back(std::make_unique<SimpleClass>("Not unique_ptr 2"));
     // This shows that the vector destroys the object not the original scope ending.
     testPushToVector(objectVector);
+    objectVector[0]->action();
+    objectVector[1]->action();
+    objectVector[2]->action();
+    objectVector[3]->action();
 
-    // Strange case where you want a vector but also want to use new for a constructor with parameters.
+    // Another way of moving objects into a vector.
     // The vector.push_back() example above shows that this is not needed.
+    std::cout << std::endl << "Vector (2)." << std::endl;
     std::vector<std::unique_ptr<SimpleClass>> uniqueObjectVector(3);
     for (int i = 0; i < 3; i++)
     {
@@ -155,8 +165,11 @@ int main
     uniqueObjectVector[2]->action();
 
     // Return a unique pointer from a function.
+    std::cout << std::endl << "Return from a function." << std::endl;
     std::unique_ptr<SimpleClass> functionObject = makeObject();
     functionObject->action();
+
+    std::cout << std::endl << "End of the program." << std::endl;
 
     // Release the standard object.
     delete localObject;

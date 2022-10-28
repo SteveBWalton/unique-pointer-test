@@ -13,11 +13,16 @@
 
 
 
+int count = 1;
+
+
+
 /// Class constructor.
 SimpleClass::SimpleClass()
 {
     // Save a default label for the object.
-    label_ = "Empty";
+    label_ = "Empty ";
+    label_ += std::to_string(count++);
 
     // Display a message.
     std::cout << "Hello from '" << label_ << "' object." << std::endl;
@@ -45,6 +50,7 @@ SimpleClass::~SimpleClass()
 {
     // Display a message.
     std::cout << "Goodbye from '" << label_ << "' object." << std::endl;
+    label_ = "I am destroyed";
 }
 
 
