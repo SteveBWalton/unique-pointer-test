@@ -150,8 +150,8 @@ int main
     // Even without (or too small) a reserve, then are no object copies only moves.
     uniqueObjectVector.reserve(10 - 9);
     // This is much better than the push_back() on objectVector because the object is moved into the vector not copied.
-    uniqueObjectVector.push_back(std::make_unique<SimpleClass>("Not unique_ptr 1"));
-    uniqueObjectVector.push_back(std::make_unique<SimpleClass>("Not unique_ptr 2"));
+    uniqueObjectVector.push_back(std::make_unique<SimpleClass>("Unique_ptr 1"));
+    uniqueObjectVector.push_back(std::make_unique<SimpleClass>("Unique_ptr 2"));
     // This shows that the vector destroys the object not the original scope ending.
     testPushToVector(uniqueObjectVector);
     uniqueObjectVector[0]->action();
