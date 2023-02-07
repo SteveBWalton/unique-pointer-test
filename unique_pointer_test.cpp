@@ -180,17 +180,17 @@ int main
     std::unique_ptr<SimpleClass> functionObject = makeObject();
     functionObject->action();
 
-    // Some litte tests on vectors.
+    // A litte test on vectors.
     std::vector<int> intVector1 = {1 ,2 ,3, 4};
     // This makes a copy.
     std::vector<int> intVectorCopy = intVector1;
     intVectorCopy[0] = 5;
-    for (int i=0; i<4; i++)
+    for (int i = 0; i < 4; i++)
     {
         std::cout << intVector1[i] << " ";
     }
     std::cout << std::endl;
-    for (int i=0; i<4; i++)
+    for (int i = 0; i < 4; i++)
     {
         std::cout << intVectorCopy[i] << " ";
     }
